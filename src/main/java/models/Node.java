@@ -19,6 +19,7 @@ public class Node {
     }
 
     public void initNextNodes() {
+
         Point top = new Point(blankPosition.x, blankPosition.y - 1);
         Point bottom = new Point(blankPosition.x, blankPosition.y + 1);
         Point left = new Point(blankPosition.x - 1, blankPosition.y);

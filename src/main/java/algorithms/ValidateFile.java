@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-class validateFile {
+public class ValidateFile {
 
     private static boolean isComment(String line) {
         return line.charAt(0) == '#';

@@ -113,4 +113,39 @@ class NodeTest {
         nextNode = new Node(puzzleString);
         assertArrayEquals(node.getNextNodes().get(2).getPuzzle(), nextNode.getPuzzle());
     }
+
+    @DisplayName("Four available moves")
+    @Test
+    void testBranchingIntoPossiblePlayingMovesTwoAvailable() {
+
+        String puzzleString = "3\n" +
+                "1 2 3\n" +
+                "0 8 4\n" +
+                "7 6 5\n";
+
+        Node node = new Node(puzzleString);
+
+        node.initNextNodes();
+        assertEquals(3, node.getNextNodes().size());
+        puzzleString = "3\n" +
+                "0 2 3\n" +
+                "1 8 4\n" +
+                "7 6 5\n";
+        Node nextNode = new Node(puzzleString);
+        assertArrayEquals(node.getNextNodes().get(0).getPuzzle(), nextNode.getPuzzle());
+
+        puzzleString = "3\n" +
+                "1 2 3\n" +
+                "7 8 4\n" +
+                "0 6 5\n";
+        nextNode = new Node(puzzleString);
+        assertArrayEquals(node.getNextNodes().get(1).getPuzzle(), nextNode.getPuzzle());
+
+        puzzleString = "3\n" +
+                "1 2 3\n" +
+                "8 0 4\n" +
+                "7 6 5\n";
+        nextNode = new Node(puzzleString);
+        assertArrayEquals(node.getNextNodes().get(2).getPuzzle(), nextNode.getPuzzle());
+    }
 }
