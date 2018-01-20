@@ -7,6 +7,7 @@ import java.awt.*;
 
 import static algorithms.Heuristics.getExpectedPoint;
 import static algorithms.Heuristics.manhattanDistance;
+import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.*;
 
 class HeuristicsTest {
