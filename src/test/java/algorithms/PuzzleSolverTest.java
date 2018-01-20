@@ -1,5 +1,5 @@
 package algorithms;
 
-class PuzzleSolverTest {
+class PuzzleSolverTest  {
 
 }

@@ -46,6 +46,7 @@ class GenerateEndGoalTest {
         assertArrayEquals(idealGoal, createEndGoal(5));
     }
 
+
     @DisplayName("Creating end goal of a puzzle 6")
     @Test
     void creatingAnEndGoalOfAPuzzleUsingASixSize() {

@@ -2,6 +2,7 @@ package algorithms;
 
 import java.awt.*;
 
+import static Global.GlobalValues.MANHATTAN_DISTANCE;
 import static utils.GenerateEndGoal.createEndGoal;
 
 
@@ -9,7 +10,8 @@ public class Heuristics {
     public static int manhattanDistance(int[][] stateGrid)
     {
         int sum = 0;
-        int value = 0;
+        int value;
+
         int [][] goalGrid = createEndGoal(stateGrid.length);
         for (int y = 0; y < stateGrid.length; y++) {
             for (int x = 0; x < stateGrid.length; x++) {
@@ -34,4 +36,11 @@ public class Heuristics {
                     expectedPoint.setLocation(x, y);
         return expectedPoint;
     }
+
+    public static int getHeuristicsValue(int[][] stateGrid, int heuristic) {
+        if (heuristic == MANHATTAN_DISTANCE)
+            return manhattanDistance(stateGrid);
+        return 0;
+    }
+
 }

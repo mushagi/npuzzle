@@ -3,6 +3,8 @@ package models;
 import java.awt.*;
 import java.util.ArrayList;
 
+import static utils.Tools.printPuzzle;
+
 public class Node {
     private final ArrayList<Node> nextNodes = new ArrayList<>();
     private int puzzleSize;
@@ -29,10 +31,12 @@ public class Node {
         if (isWithinPuzzleBounds(bottom)) nextNodes.add(getSwappedPointsNode(bottom));
         if (isWithinPuzzleBounds(left)) nextNodes.add(getSwappedPointsNode(left));
         if (isWithinPuzzleBounds(right)) nextNodes.add(getSwappedPointsNode(right));
+
     }
 
     private Node getSwappedPointsNode(Point tempPoint) {
         Node tempNode;
+
         int tempPuzzle[][] = createCopyOfPuzzle();
         int temp = tempPuzzle[blankPosition.y][blankPosition.x];
         tempPuzzle[blankPosition.y][blankPosition.x] = tempPuzzle[tempPoint.y][tempPoint.x];
@@ -83,8 +87,8 @@ public class Node {
     }
 
     public ArrayList<Node> getNextNodes() {
+        initNextNodes();
         return nextNodes;
     }
-
 
 }

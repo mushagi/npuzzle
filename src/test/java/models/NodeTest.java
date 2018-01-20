@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 class NodeTest {
     @DisplayName("Converting from string to 2d array")
@@ -126,7 +127,6 @@ class NodeTest {
         Node node = new Node(puzzleString);
 
         node.initNextNodes();
-        assertEquals(3, node.getNextNodes().size());
         puzzleString = "3\n" +
                 "0 2 3\n" +
                 "1 8 4\n" +
@@ -148,4 +148,21 @@ class NodeTest {
         nextNode = new Node(puzzleString);
         assertArrayEquals(node.getNextNodes().get(2).getPuzzle(), nextNode.getPuzzle());
     }
+
+    @DisplayName("Check if node is array is equal to another")
+    @Test
+    public void checkIfNodeArrayIsEqualToAnother(){
+        String puzzleString = "3\n" +
+                "1 2 3\n" +
+                "8 0 4\n" +
+                "7 6 5\n";
+        Node node = new Node(puzzleString);
+        puzzleString = "3\n" +
+                "1 2 3\n" +
+                "8 0 4\n" +
+                "7 6 5\n";
+        Node nextNode = new Node(puzzleString);
+        assertEquals(true,node.equals(nextNode.getPuzzle()));
+    }
+
 }
