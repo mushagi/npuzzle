@@ -3,16 +3,20 @@ package algorithms;
 import java.awt.*;
 
 import static Global.GlobalValues.MANHATTAN_DISTANCE;
-import static utils.GenerateEndGoal.createEndGoal;
 
 
-public class Heuristics {
-    public static int manhattanDistance(int[][] stateGrid)
+class Heuristics {
+    public static int manhattanDistance(int[][] stateGrid, int[][] goalGrid)
     {
+        int sum;
+        sum = getDistanceCost(stateGrid, goalGrid);
+
+        return sum;
+    }
+
+    public static int getDistanceCost(int[][] stateGrid, int[][] goalGrid) {
         int sum = 0;
         int value;
-
-        int [][] goalGrid = createEndGoal(stateGrid.length);
         for (int y = 0; y < stateGrid.length; y++) {
             for (int x = 0; x < stateGrid.length; x++) {
                value = stateGrid[y][x];
@@ -26,6 +30,7 @@ public class Heuristics {
         return sum;
     }
 
+
     public static Point getExpectedPoint(int [][] goalGrid, int value)
     {
         Point expectedPoint = new Point();
@@ -37,9 +42,9 @@ public class Heuristics {
         return expectedPoint;
     }
 
-    public static int getHeuristicsValue(int[][] stateGrid, int heuristic) {
+    public static int getHeuristicsValue(int[][] stateGrid, int [][] goalGrid, int heuristic) {
         if (heuristic == MANHATTAN_DISTANCE)
-            return manhattanDistance(stateGrid);
+            return manhattanDistance(stateGrid, goalGrid);
         return 0;
     }
 

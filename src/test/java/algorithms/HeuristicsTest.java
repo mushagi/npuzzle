@@ -8,20 +8,26 @@ import java.awt.*;
 import static algorithms.Heuristics.getExpectedPoint;
 import static algorithms.Heuristics.manhattanDistance;
 import static org.junit.Assert.assertEquals;
-import static org.junit.jupiter.api.Assertions.*;
 
 class HeuristicsTest {
 
     @DisplayName("The Manhattan Distance")
     @Test
     void checkManhattanDistanceReturnValue() {
+
+        int[][] goal = {
+                {1,2,3},
+                {8,0,4},
+                {7,6,5}
+        };
+
         int[][] stateGrid = {
                 {1,2,3},
                 {0,8,4},
                 {7,6,5}
         };
 
-        assertEquals(1, manhattanDistance(stateGrid));
+        assertEquals(1, manhattanDistance(stateGrid,goal ));
 
         int[][] stateGrid2 = {
                 {1,2,3},
@@ -29,7 +35,7 @@ class HeuristicsTest {
                 {7,0,6}
         };
 
-        assertEquals(3, manhattanDistance(stateGrid2));
+        assertEquals(3, manhattanDistance(stateGrid2, goal));
 
     }
 
@@ -53,6 +59,7 @@ class HeuristicsTest {
         Point valueTwo = new Point(1,0);
         value = 2;
         assertEquals(valueTwo, getExpectedPoint(gridGoal, value));
+
 
     }
 

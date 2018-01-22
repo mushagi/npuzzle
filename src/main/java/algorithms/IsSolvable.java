@@ -2,9 +2,9 @@ package algorithms;
 
 import models.Node;
 
-public class IsSolvable {
+class IsSolvable {
 
-    public boolean isPuzzleSolvable(Node node)
+    public static boolean isPuzzleSolvable(Node node)
     {
         int size = node.getPuzzleSize();
         int items = size * size;
@@ -27,7 +27,7 @@ public class IsSolvable {
 
     }
 
-    public static int inversionCount(int n, int[] array)
+    private static int inversionCount(int n, int[] array)
     {
         int inversion = 0;
 

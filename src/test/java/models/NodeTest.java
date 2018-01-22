@@ -5,16 +5,15 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 class NodeTest {
     @DisplayName("Converting from string to 2d array")
     @Test
     void checkIfPuzzleStringHasBeenConvertedIntoATwoDArray() {
         String puzzleString = "3\n" +
-                        "3 2 6\n" +
-                        "1 4 0\n"+
-                        "8 7 5\n";
+                "0 6 5\n" +
+                "2 4 8\n" +
+                "3 7 1\n";
 
         Node node = new Node(puzzleString);
 
@@ -149,20 +148,37 @@ class NodeTest {
         assertArrayEquals(node.getNextNodes().get(2).getPuzzle(), nextNode.getPuzzle());
     }
 
-    @DisplayName("Check if node is array is equal to another")
+
+    @DisplayName("Four available moves")
     @Test
-    public void checkIfNodeArrayIsEqualToAnother(){
+    void testBranchingIntoPossiblePlayingMovesRealTwoAvailable() {
+
         String puzzleString = "3\n" +
-                "1 2 3\n" +
-                "8 0 4\n" +
-                "7 6 5\n";
+                "0 5 6\n" +
+                "1 8 4\n" +
+                "3 2 7";
+
         Node node = new Node(puzzleString);
+        node.initNextNodes();
+
         puzzleString = "3\n" +
-                "1 2 3\n" +
-                "8 0 4\n" +
-                "7 6 5\n";
+                "1 5 6\n" +
+                "0 8 4\n" +
+                "3 2 7\n";
         Node nextNode = new Node(puzzleString);
-        assertEquals(true,node.equals(nextNode.getPuzzle()));
+        assertArrayEquals(node.getNextNodes().get(0).getPuzzle(), nextNode.getPuzzle());
+
+        puzzleString = "3\n" +
+                "5 0 6\n" +
+                "1 8 4\n" +
+                "3 2 7\n";
+        nextNode = new Node(puzzleString);
+        assertArrayEquals(node.getNextNodes().get(1).getPuzzle(), nextNode.getPuzzle());
+
+
+        assertEquals(node.getNextNodes().size(), 2);
     }
+
+
 
 }

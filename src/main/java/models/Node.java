@@ -3,10 +3,8 @@ package models;
 import java.awt.*;
 import java.util.ArrayList;
 
-import static utils.Tools.printPuzzle;
-
 public class Node {
-    private final ArrayList<Node> nextNodes = new ArrayList<>();
+    private ArrayList<Node> nextNodes;
     private int puzzleSize;
     private int[][] puzzle;
     private Point blankPosition;
@@ -18,17 +16,22 @@ public class Node {
     private Node(int[][] puzzle, Point blankPosition) {
         this.puzzle = puzzle;
         this.blankPosition = blankPosition;
+        puzzleSize = puzzle.length;
     }
 
     public void initNextNodes() {
 
+        nextNodes = new ArrayList<>();
         Point top = new Point(blankPosition.x, blankPosition.y - 1);
         Point bottom = new Point(blankPosition.x, blankPosition.y + 1);
         Point left = new Point(blankPosition.x - 1, blankPosition.y);
         Point right = new Point(blankPosition.x + 1, blankPosition.y);
 
-        if (isWithinPuzzleBounds(top)) nextNodes.add(getSwappedPointsNode(top));
+        if (isWithinPuzzleBounds(top))
+            nextNodes.add(getSwappedPointsNode(top));
+
         if (isWithinPuzzleBounds(bottom)) nextNodes.add(getSwappedPointsNode(bottom));
+
         if (isWithinPuzzleBounds(left)) nextNodes.add(getSwappedPointsNode(left));
         if (isWithinPuzzleBounds(right)) nextNodes.add(getSwappedPointsNode(right));
 
@@ -36,19 +39,23 @@ public class Node {
 
     private Node getSwappedPointsNode(Point tempPoint) {
         Node tempNode;
-
         int tempPuzzle[][] = createCopyOfPuzzle();
         int temp = tempPuzzle[blankPosition.y][blankPosition.x];
+
         tempPuzzle[blankPosition.y][blankPosition.x] = tempPuzzle[tempPoint.y][tempPoint.x];
         tempPuzzle[tempPoint.y][tempPoint.x] = temp;
+
         tempNode = new Node(tempPuzzle, tempPoint);
+
         return tempNode;
     }
 
     private int[][] createCopyOfPuzzle() {
         int[][] tempPuzzle = new int[puzzleSize][puzzleSize];
-        for (int i = 0; i < puzzleSize; i++) {
-            System.arraycopy(puzzle[i], 0, tempPuzzle[i], 0, puzzleSize);
+        for (int x = 0; x < puzzleSize; x++) {
+            for (int y = 0; y < puzzleSize; y++) {
+                tempPuzzle[y][x] = puzzle[y][x];
+            }
         }
         return tempPuzzle;
     }
@@ -87,7 +94,6 @@ public class Node {
     }
 
     public ArrayList<Node> getNextNodes() {
-        initNextNodes();
         return nextNodes;
     }
 

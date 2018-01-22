@@ -2,14 +2,12 @@ package utils;
 
 import models.Node;
 
-import java.util.ArrayList;
-
 public class Tools {
-    public static void printPuzzle(int[][] puzzle) {
-        for (int y = 0; y < puzzle.length; y++) {
+    private static void printPuzzle(int[][] puzzle) {
+        for (int[] aPuzzle : puzzle) {
             for (int x = 0; x < puzzle.length; x++) {
-                System.out.print(puzzle[y][x] +" ");
-                if (x == puzzle.length -1 ) System.out.println();
+                System.out.print(aPuzzle[x] + " ");
+                if (x == puzzle.length - 1) System.out.println();
             }
         }
         System.out.println("__________________________________");
