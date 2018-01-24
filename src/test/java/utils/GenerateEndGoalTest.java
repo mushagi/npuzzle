@@ -3,7 +3,7 @@ package utils;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static utils.GenerateEndGoal.createEndGoal;
 
 class GenerateEndGoalTest {

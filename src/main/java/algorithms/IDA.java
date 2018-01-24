@@ -4,9 +4,9 @@ import models.Node;
 
 import java.util.Stack;
 
-import static Global.GlobalValues.MANHATTAN_DISTANCE;
 import static algorithms.Heuristics.getDistanceCost;
 import static algorithms.Heuristics.getHeuristicsValue;
+import static global.GlobalValues.MANHATTAN_DISTANCE;
 import static utils.GenerateEndGoal.createEndGoal;
 import static utils.Tools.isMatchingPuzzles;
 import static utils.Tools.printPuzzle;

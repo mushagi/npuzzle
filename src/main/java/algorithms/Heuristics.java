@@ -2,12 +2,13 @@ package algorithms;
 
 import java.awt.*;
 
-import static Global.GlobalValues.MANHATTAN_DISTANCE;
+import static global.GlobalValues.MANHATTAN_DISTANCE;
 
 
 class Heuristics {
-    public static int manhattanDistance(int[][] stateGrid, int[][] goalGrid)
-    {
+
+    public static int manhattanDistance(int[][] stateGrid, int[][] goalGrid) {
+
         int sum;
         sum = getDistanceCost(stateGrid, goalGrid);
 
@@ -15,8 +16,10 @@ class Heuristics {
     }
 
     public static int getDistanceCost(int[][] stateGrid, int[][] goalGrid) {
+
         int sum = 0;
         int value;
+
         for (int y = 0; y < stateGrid.length; y++) {
             for (int x = 0; x < stateGrid.length; x++) {
                value = stateGrid[y][x];
