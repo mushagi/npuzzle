@@ -4,6 +4,7 @@ import java.awt.*;
 
 import static global.GlobalValues.MANHATTAN_DISTANCE;
 import static global.GlobalValues.MISPLACED_TILES;
+import static global.GlobalValues.TILES_OUT_OF_ROW_AND_COL;
 
 
 class Heuristics {
@@ -69,7 +70,28 @@ class Heuristics {
             return manhattanDistance(stateGrid, goalGrid);
         else if (heuristic == MISPLACED_TILES)
             return missPlacedTiles(stateGrid, goalGrid);
+        else if(heuristic == TILES_OUT_OF_ROW_AND_COL)
+            return tilesOutOfRowAndCol(stateGrid, goalGrid);
         return 0;
+    }
+
+    public static int tilesOutOfRowAndCol(int[][] stateGrid, int[][] goalGrid) {
+        int count = 0;
+        int rowCount = 0;
+        boolean rowFlag = false;
+        for (int y = 0; y < stateGrid.length; y++){
+            for (int x = 0; x < stateGrid.length; x++) {
+                rowCount++;
+                rowFlag = rowFlag || stateGrid[y][x] == goalGrid[y][x];
+                if (rowCount == stateGrid.length) {
+                    if (rowFlag) count++;
+                    rowCount = 0;
+                    rowFlag = false;
+                }
+            }
+        }
+
+        return count;
     }
 
 }

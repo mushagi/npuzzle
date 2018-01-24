@@ -6,8 +6,8 @@ import org.junit.jupiter.api.Test;
 
 import java.awt.*;
 
-import static algorithms.Heuristics.getExpectedPoint;
-import static algorithms.Heuristics.manhattanDistance;
+import static algorithms.Heuristics.*;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class HeuristicsTest {
@@ -62,6 +62,26 @@ class HeuristicsTest {
         assertEquals(valueTwo, getExpectedPoint(gridGoal, value));
 
 
+    }
+
+
+    @DisplayName("Testing Tiles out of rows and coloumns")
+    @Test
+    void testingTilesOfRowAndColoumns() {
+
+        int[][] gridGoal = {
+                {1,2,3},
+                {8,0,4},
+                {7,6,5}
+        };
+
+        int[][] stateGrid = {
+                {1,2,3},
+                {6,0,4},
+                {8,5,7}
+        };
+
+        assertEquals(3, tilesOutOfRowAndCol(stateGrid, gridGoal));
     }
 
 }

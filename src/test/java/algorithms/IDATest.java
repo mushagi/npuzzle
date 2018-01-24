@@ -4,6 +4,8 @@ package algorithms;
 import models.Node;
 import org.junit.jupiter.api.Test;
 
+import static global.GlobalValues.*;
+
 class IDATest {
     @Test
     void doIterativeDeepeningSearchSimple() {
@@ -16,7 +18,7 @@ class IDATest {
                        "1 5 8\n";
 
         Node node = new Node(puzzleString);
-        ida.doIterativeDeepeningSearch(node, 1);
+        ida.doIterativeDeepeningSearch(node, MANHATTAN_DISTANCE);
         System.out.print(ida.toString());
     }
 }
