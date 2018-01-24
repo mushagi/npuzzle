@@ -3,17 +3,18 @@ package utils;
 import models.Node;
 
 public class Tools {
-    private static void printPuzzle(int[][] puzzle) {
+    private static String printPuzzle(int[][] puzzle) {
+        StringBuilder tempString = new StringBuilder();
         for (int[] aPuzzle : puzzle) {
             for (int x = 0; x < puzzle.length; x++) {
-                System.out.print(aPuzzle[x] + " ");
-                if (x == puzzle.length - 1) System.out.println();
+                tempString.append(aPuzzle[x]).append(" ");
+                if (x == puzzle.length - 1) tempString.append("\n");
             }
         }
-        System.out.println("__________________________________");
+        return tempString.toString();
     }
-    public static void printPuzzle(Node node) {
-        printPuzzle(node.getPuzzle());
+    public static String printPuzzle(Node node) {
+        return printPuzzle(node.getPuzzle());
     }
 
     public static boolean isMatchingPuzzles(int[][] puzzleOne, int[][] puzzleTwo) {

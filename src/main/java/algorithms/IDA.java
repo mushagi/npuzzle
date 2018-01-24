@@ -4,67 +4,64 @@ import models.Node;
 
 import java.util.Stack;
 
-import static algorithms.Heuristics.getDistanceCost;
 import static algorithms.Heuristics.getHeuristicsValue;
-import static global.GlobalValues.MANHATTAN_DISTANCE;
+import static global.GlobalValues.MAX_INT;
 import static utils.GenerateEndGoal.createEndGoal;
 import static utils.Tools.isMatchingPuzzles;
 import static utils.Tools.printPuzzle;
 
 class IDA {
-
     private static final int FOUND = -1;
     private static int[][] goal;
-    private int moves = 0;
-
+    private int complexity = 0;
     private Stack<Node> stack;
+    private long time = 0;
+    private int heuristics;
 
-    public void doIterativeDeepeningSearch(Node node) {
-        goal = createEndGoal(node.getPuzzleSize());
-        int threshold = getHeuristicsValue(node.getPuzzle(), goal, MANHATTAN_DISTANCE);
 
+    public void doIterativeDeepeningSearch(Node node, int heuristics) {
+        int threshold;
         int temp;
+        this.heuristics = heuristics;
+
+        goal = createEndGoal(node.getPuzzleSize());
+        threshold = getHeuristicsValue(node.getPuzzle(), goal, heuristics);
         stack = new Stack<>();
         stack.push(node);
-        while (true)
-        {
-            temp = search( 0, threshold);
+
+        long startTime = System.currentTimeMillis();
+        while (true) {
+            temp = search(0, threshold);
             if (temp == FOUND) break;
             threshold = temp;
             System.gc();
-         }
+        }
+        long endTime   = System.currentTimeMillis();
+        time = endTime - startTime;
 
     }
 
     private int search(int g, int threshold) {
+        Node node;
+        int fScore;
+        int min;
 
-        Node node = stack.lastElement();
+        complexity++;
+        node = stack.lastElement();
+        fScore = g + getHeuristicsValue(node.getPuzzle(), goal, heuristics);
 
-       // if (moves > 3000000) {System.out.println("could not solve puzzle"); System.exit(0);}
-        int fScore = g + getHeuristicsValue(node.getPuzzle(), goal, MANHATTAN_DISTANCE);
-        if(fScore > threshold) return fScore;
+        if (fScore > threshold) return fScore;
+        if (isMatchingPuzzles(node.getPuzzle(), goal)) return FOUND;
 
-        if (isMatchingPuzzles(node.getPuzzle(), goal)) {
-            System.out.println("\nFound");
-            printPuzzle(node);
-            System.out.println("\n ");
-            System.exit(0);
-            return FOUND;
-        }
-
-
-        int min = 2147483647;
-
+        min = MAX_INT;
         node.initNextNodes();
 
         for (Node tempNode : node.getNextNodes()) {
             if (!isStateRead(tempNode.getPuzzle())) {
-                moves++;
                 stack.push(tempNode);
-                int temp = search(g + getDistanceCost(node.getPuzzle(), tempNode.getPuzzle()), threshold);
+                int temp = search(g++, threshold);
                 if (temp == FOUND) return FOUND;
-                if (temp < min)
-                    min = temp;
+                if (temp < min) min = temp;
                 stack.pop();
             }
         }
@@ -72,11 +69,29 @@ class IDA {
     }
 
     private boolean isStateRead(int[][] puzzle) {
-        for (Node tempState: stack)
-            if(isMatchingPuzzles(puzzle, tempState.getPuzzle()))
+        for (Node tempState : stack)
+            if (isMatchingPuzzles(puzzle, tempState.getPuzzle()))
                 return true;
         return false;
     }
 
+    private String getSolvedPuzzles() {
+        StringBuilder tempString = new StringBuilder();
+        for (Node node : stack)
+            tempString.append(printPuzzle(node)).append("\n___________________________\n");
+        return tempString.toString();
+    }
 
+
+
+
+    @Override
+    public String toString() {
+        return "IDA{\n" +
+                "complexity =\t" + complexity +
+                "\nNumber of moves=\t" + stack.size() +
+                "\ntime =\t" + (time/1000.0) +" seconds"+ "\n" +
+                "\n"+ getSolvedPuzzles()  +
+                "\n}";
+    }
 }
