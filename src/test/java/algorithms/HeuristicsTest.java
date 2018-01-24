@@ -65,9 +65,9 @@ class HeuristicsTest {
     }
 
 
-    @DisplayName("Testing Tiles out of rows and coloumns")
+    @DisplayName("Testing Tiles out of rows and column")
     @Test
-    void testingTilesOfRowAndColoumns() {
+    void testingTilesOfRowAndColumns() {
 
         int[][] gridGoal = {
                 {1,2,3},

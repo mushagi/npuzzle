@@ -21,13 +21,13 @@ class NodeTest {
         int size = 3;
         int[][] tempPuzzle = new int[size][size];
 
-        tempPuzzle[0][0] = 3;
-        tempPuzzle[0][1] = 2;
-        tempPuzzle[0][2] = 6;
-        tempPuzzle[1][0] = 1;
+        tempPuzzle[0][0] = 0;
+        tempPuzzle[0][1] = 6;
+        tempPuzzle[0][2] = 5;
+        tempPuzzle[1][0] = 2;
         tempPuzzle[1][1] = 4;
-        tempPuzzle[1][2] = 0;
-        tempPuzzle[2][0] = 8;
+        tempPuzzle[1][2] = 8;
+        tempPuzzle[2][0] = 2;
         tempPuzzle[2][1] = 7;
         tempPuzzle[2][2] = 5;
 

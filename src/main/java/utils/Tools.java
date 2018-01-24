@@ -2,6 +2,9 @@ package utils;
 
 import models.Node;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+
 public class Tools {
     private static String printPuzzle(int[][] puzzle) {
         StringBuilder tempString = new StringBuilder();
@@ -23,5 +26,23 @@ public class Tools {
                 if (puzzleOne[y][x] != puzzleTwo[y][x])
                     return false;
         return true;
+    }
+
+    public static String getPuzzleString(String filename) {
+        StringBuilder temp = new StringBuilder();
+
+        try {
+            BufferedReader br;
+            br = new BufferedReader(new FileReader(filename));
+            String line;
+            while ((line = br.readLine()) != null) {
+                temp.append(line);
+                temp.append("\n");
+            }
+
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return temp.toString();
     }
 }

@@ -10,7 +10,7 @@ import static utils.GenerateEndGoal.createEndGoal;
 import static utils.Tools.isMatchingPuzzles;
 import static utils.Tools.printPuzzle;
 
-class IDA {
+public class IDA {
     private static final int FOUND = -1;
     private static int[][] goal;
     private int complexity = 0;
@@ -19,15 +19,29 @@ class IDA {
     private int heuristics;
 
 
-    public void doIterativeDeepeningSearch(Node node, int heuristics) {
+    public int getComplexity() {
+        return complexity;
+    }
+
+    public Stack<Node> getStack() {
+        return stack;
+    }
+
+    public long getTime() {
+        return time;
+    }
+
+    public void doIterativeDeepeningSearch(String puzzleString, int heuristics) {
         int threshold;
         int temp;
-        this.heuristics = heuristics;
+        Node initNode;
 
-        goal = createEndGoal(node.getPuzzleSize());
-        threshold = getHeuristicsValue(node.getPuzzle(), goal, heuristics);
+        this.heuristics = heuristics;
+        initNode = new Node(puzzleString);
+        goal = createEndGoal(initNode.getPuzzleSize());
+        threshold = getHeuristicsValue(initNode.getPuzzle(), goal, heuristics);
         stack = new Stack<>();
-        stack.push(node);
+        stack.push(initNode);
 
         long startTime = System.currentTimeMillis();
         while (true) {

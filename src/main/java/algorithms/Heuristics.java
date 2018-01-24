@@ -9,7 +9,7 @@ import static global.GlobalValues.TILES_OUT_OF_ROW_AND_COL;
 
 class Heuristics {
 
-    public static int manhattanDistance(int[][] stateGrid, int[][] goalGrid) {
+    static int manhattanDistance(int[][] stateGrid, int[][] goalGrid) {
 
         int sum;
         sum = getDistanceCost(stateGrid, goalGrid);
@@ -52,7 +52,7 @@ class Heuristics {
     }
 
 
-    public static Point getExpectedPoint(int [][] goalGrid, int value)
+  static Point getExpectedPoint(int[][] goalGrid, int value)
     {
         Point expectedPoint = new Point();
         expectedPoint.x = -1;
@@ -65,17 +65,19 @@ class Heuristics {
         return expectedPoint;
     }
 
-    public static int getHeuristicsValue(int[][] stateGrid, int [][] goalGrid, int heuristic) {
-        if (heuristic == MANHATTAN_DISTANCE)
-            return manhattanDistance(stateGrid, goalGrid);
-        else if (heuristic == MISPLACED_TILES)
-            return missPlacedTiles(stateGrid, goalGrid);
-        else if(heuristic == TILES_OUT_OF_ROW_AND_COL)
-            return tilesOutOfRowAndCol(stateGrid, goalGrid);
+    static int getHeuristicsValue(int[][] stateGrid, int[][] goalGrid, int heuristic) {
+        switch (heuristic) {
+            case MANHATTAN_DISTANCE:
+                return manhattanDistance(stateGrid, goalGrid);
+            case MISPLACED_TILES:
+                return missPlacedTiles(stateGrid, goalGrid);
+            case TILES_OUT_OF_ROW_AND_COL:
+                return tilesOutOfRowAndCol(stateGrid, goalGrid);
+        }
         return 0;
     }
 
-    public static int tilesOutOfRowAndCol(int[][] stateGrid, int[][] goalGrid) {
+    static int tilesOutOfRowAndCol(int[][] stateGrid, int[][] goalGrid) {
         int count = 0;
         int rowCount = 0;
         boolean rowFlag = false;
