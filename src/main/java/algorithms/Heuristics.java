@@ -21,9 +21,9 @@ class Heuristics {
         int sum = 0;
         int value;
 
-        for (int[] aStateGrid : stateGrid) {
+        for (int y = 0; y < stateGrid.length; y++) {
             for (int x = 0; x < stateGrid.length; x++) {
-                value = aStateGrid[x];
+                value = stateGrid[y][x];
                 Point expectedPoint = getExpectedPoint(goalGrid, value);
                 if (expectedPoint.x == -1 && expectedPoint.y == -1)
                     sum++;
@@ -77,23 +77,52 @@ class Heuristics {
         return 0;
     }
 
-    static int tilesOutOfRowAndCol(int[][] stateGrid, int[][] goalGrid) {
+    static int tilesOutOfRowAndCol(int[][] stateGrid, int[][] goal) {
         int count = 0;
-        int rowCount = 0;
-        boolean rowFlag = false;
-        for (int y = 0; y < stateGrid.length; y++){
-            for (int x = 0; x < stateGrid.length; x++) {
-                rowCount++;
-                rowFlag = rowFlag || stateGrid[y][x] == goalGrid[y][x];
-                if (rowCount == stateGrid.length) {
-                    if (rowFlag) count++;
-                    rowCount = 0;
-                    rowFlag = false;
-                }
-            }
-        }
+        int y = 0, x = 0, length = stateGrid.length;
 
+        while (y < length) {
+            while (x < length) {
+                int stateValue = stateGrid[y][x];
+                if (stateValue != 0) {
+                    if (!isRightRow(stateValue, y, goal))
+                        count++;
+                    if (!isRightCol(stateValue, x, goal))
+                        count++;
+                }
+                x++;
+            }
+            x = 0;
+            y++;
+        }
         return count;
     }
+
+    static boolean isRightRow(int value, int y, int goal[][])
+    {
+        int x = 0;
+        while(x < goal.length)
+        {
+            int goalValue = goal[y][x];
+            if(goalValue == value)
+                return true;
+            x++;
+        }
+        return false;
+    }
+
+
+    static boolean isRightCol(int value, int x, int goal[][])
+    {
+        int y = 0;
+        while(y < goal.length) {
+            int goalValue = goal[y][x];
+            if(goalValue == value)
+                return true;
+            y++;
+        }
+        return false;
+    }
+
 
 }

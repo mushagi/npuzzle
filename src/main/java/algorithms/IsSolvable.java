@@ -7,13 +7,13 @@ public class IsSolvable {
     public static boolean isPuzzleSolvable(String puzzleString)
     {
         Node node = new Node(puzzleString);
-        int size = node.getPuzzleSize();
-        int items = size * size;
+
+        int items = node.getPuzzleSize() * node.getPuzzleSize();
         int[] straight = new int[items];
         int index = 0, space_row = 0;
 
-        for ( int i=0; i < size; i++) {
-            for (int j = 0; j < size; j++) {
+        for ( int i=0; i < node.getPuzzleSize(); i++) {
+            for (int j = 0; j < node.getPuzzleSize(); j++) {
                 straight[index] = node.getPuzzle()[i][j];
                 if (node.getPuzzle()[i][j] == 0)
                     space_row = i;
@@ -22,10 +22,22 @@ public class IsSolvable {
         }
 
         int inversions = inversionCount(items, straight);
-        if(size % 2 != 0) return inversions % 2 == 0;
+        if(node.getPuzzleSize() % 2 != 0)
+        {
+            if(inversions % 2 == 0)
+                return true;
+            else
+                return false;
+        }
         else
-            return space_row % 2 == 0 && inversions % 2 != 0 || space_row % 2 != 0 && inversions % 2 == 0;
-
+        {
+            if (space_row % 2 == 0 && inversions % 2 != 0)
+                return true;
+            if(space_row % 2 != 0 && inversions % 2 == 0)
+                return true;
+            else
+                return false;
+        }
     }
 
     private static int inversionCount(int n, int[] array)

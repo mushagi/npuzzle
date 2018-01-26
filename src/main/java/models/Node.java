@@ -1,5 +1,7 @@
 package models;
 
+import global.GlobalValues;
+
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -8,6 +10,7 @@ public class Node {
     private int puzzleSize;
     private int[][] puzzle;
     private Point blankPosition;
+    GlobalValues.direction direction;
 
     public Node(String puzzleString) {
         initPuzzle(puzzleString);
@@ -97,4 +100,11 @@ public class Node {
         return nextNodes;
     }
 
+    public GlobalValues.direction getDirection() {
+        return direction;
+    }
+
+    public void setDirection(GlobalValues.direction direction) {
+        this.direction = direction;
+    }
 }
