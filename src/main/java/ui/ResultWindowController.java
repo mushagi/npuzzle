@@ -2,9 +2,11 @@ package ui;
 
 import global.GlobalValues;
 import javafx.animation.TranslateTransition;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
@@ -27,23 +29,57 @@ public class ResultWindowController {
     @FXML
     private Button btnPlay;
 
+    GridPane gpnGrid = new GridPane();
+
     @FXML
     void btnPlay_MouseClicked(MouseEvent event) {
-
+        resultIndex++;
         moveTiles();
 
     }
 
+    int resultIndex = 1;
+
     private void moveTiles(){
 
         StackPane stackPane1 = null;
-        StackPane stackPane2 = null;
         GlobalValues.direction prevDirection = null;
+
+        int value = getValue( resultSolvedPuzzlePath.get(resultIndex));
+       // prevDirection = resultSolvedPuzzlePath.get(resultIndex).getDirection();
+
+        System.out.println("Going " + prevDirection);
+/*
+        try {
+            ObservableList<Node> childrens = gpnGrid.getChildren();
+            for (Node node : childrens) {
+                StackPane stackPane = (StackPane) node;
+                ObservableList<Node> stackChildrens = stackPane.getChildren();
+                if (stackChildrens.size() == 0) {
+                    stackPane2 = stackPane;
+                } else
+                    for (Node text : stackChildrens) {
+                        Text text1 = (Text) text;
+                        if (text1.getText().equals("" + value)) {
+                            stackPane1 = stackPane;
+                        }
+                    }
+            }
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
+        /*
+
+
+        switchTiles(stackPane1, stackPane2, prevDirection);
+
         /*
         for (models.Node stackNode: resultSolvedPuzzlePath) {
             prevDirection
             int value = getValue(stackNode);
-            /*
+
             try {
                 ObservableList<Node> childrens = gpnGrid.getChildren();
                 for (Node node : childrens) {
@@ -72,7 +108,6 @@ public class ResultWindowController {
         }
         */
 
-
     }
 
     private int getValue(models.Node stackNode) {
@@ -92,23 +127,23 @@ public class ResultWindowController {
         return 0;
     }
 
-    private void switchTiles(StackPane stackPane1, StackPane stackPane2) {
-        animateTiles(stackPane1);
+    private void switchTiles(StackPane stackPane1, StackPane stackPane2, GlobalValues.direction direction) {
+        animateTiles(stackPane1, direction);
     }
 
-    private void animateTiles(StackPane pane)
+    private void animateTiles(StackPane pane, GlobalValues.direction direction)
     {
 
         TranslateTransition translateTransition = new TranslateTransition();
         translateTransition.setDuration(Duration.millis(1000));
         translateTransition.setNode(pane);
-        if (GlobalValues.direction.down == GlobalValues.direction.right)
+        if (direction== GlobalValues.direction.right)
             translateTransition.setByX(pane.getLayoutX() + 100);
-        if (GlobalValues.direction.down == GlobalValues.direction.left)
+        if (direction == GlobalValues.direction.left)
             translateTransition.setByX(pane.getLayoutX() - 100);
-        if (GlobalValues.direction.down == GlobalValues.direction.up)
+        if (direction == GlobalValues.direction.up)
             translateTransition.setByY(pane.getLayoutX() - 200);
-        if (GlobalValues.direction.down == GlobalValues.direction.down)
+        if (direction == GlobalValues.direction.down)
             translateTransition.setByY(pane.getLayoutX() + 100);
         translateTransition.setCycleCount(1);
         translateTransition.setAutoReverse(false);
@@ -116,7 +151,6 @@ public class ResultWindowController {
     }
 
     private void createGrid() {
-        GridPane gpnGrid = new GridPane();
         gpnGrid.setPrefSize(500, 100);
         gpnGrid.setLayoutX(50);
         gpnGrid.setLayoutY(50);
@@ -153,7 +187,7 @@ public class ResultWindowController {
                     pane.getChildren().add(text);
                     StackPane.setAlignment(text, Pos.CENTER);
                 }
-                gpnGrid.add(pane, i, j);
+                gpnGrid.add(pane, j, i);
             }
         }
         apnMain.getChildren().add(gpnGrid);

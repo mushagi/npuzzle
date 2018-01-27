@@ -8,6 +8,7 @@ import static utils.Tools.printPuzzle;
 public class TextBaseUserInterface extends UserInterface{
 
     public TextBaseUserInterface() {
+
     }
 
     @Override

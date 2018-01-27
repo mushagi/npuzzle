@@ -2,9 +2,7 @@ package algorithms;
 
 import java.awt.*;
 
-import static global.GlobalValues.MANHATTAN_DISTANCE;
-import static global.GlobalValues.MISPLACED_TILES;
-import static global.GlobalValues.TILES_OUT_OF_ROW_AND_COL;
+import static global.GlobalValues.*;
 
 
 class Heuristics {
@@ -17,13 +15,13 @@ class Heuristics {
         return sum;
     }
 
-    private static int missPlacedTiles(int[][] stateGrid, int[][] goalGrid){
+    private static int missPlacedTiles(int[][] stateGrid, int[][] goalGrid) {
         int sum = 0;
         int value;
 
-        for (int y = 0; y < stateGrid.length; y++) {
+        for (int[] aStateGrid : stateGrid) {
             for (int x = 0; x < stateGrid.length; x++) {
-                value = stateGrid[y][x];
+                value = aStateGrid[x];
                 Point expectedPoint = getExpectedPoint(goalGrid, value);
                 if (expectedPoint.x == -1 && expectedPoint.y == -1)
                     sum++;
@@ -40,27 +38,26 @@ class Heuristics {
 
         for (int y = 0; y < stateGrid.length; y++) {
             for (int x = 0; x < stateGrid.length; x++) {
-               value = stateGrid[y][x];
-               if(value == 0) continue;
-               Point expectedPoint = getExpectedPoint(goalGrid, value);
-               int distanceX =  x - expectedPoint.x;
-               int distanceY = y - expectedPoint.y;
-               sum += Math.abs(distanceX) + Math.abs(distanceY);
+                value = stateGrid[y][x];
+                if (value == 0) continue;
+                Point expectedPoint = getExpectedPoint(goalGrid, value);
+                int distanceX = x - expectedPoint.x;
+                int distanceY = y - expectedPoint.y;
+                sum += Math.abs(distanceX) + Math.abs(distanceY);
             }
         }
         return sum;
     }
 
 
-  static Point getExpectedPoint(int[][] goalGrid, int value)
-    {
+    static Point getExpectedPoint(int[][] goalGrid, int value) {
         Point expectedPoint = new Point();
         expectedPoint.x = -1;
         expectedPoint.y = -1;
 
         for (int y = 0; y < goalGrid.length; y++)
             for (int x = 0; x < goalGrid.length; x++)
-                if(goalGrid[y][x] == value)
+                if (goalGrid[y][x] == value)
                     expectedPoint.setLocation(x, y);
         return expectedPoint;
     }
@@ -98,13 +95,11 @@ class Heuristics {
         return count;
     }
 
-    static boolean isRightRow(int value, int y, int goal[][])
-    {
+    private static boolean isRightRow(int value, int y, int goal[][]) {
         int x = 0;
-        while(x < goal.length)
-        {
+        while (x < goal.length) {
             int goalValue = goal[y][x];
-            if(goalValue == value)
+            if (goalValue == value)
                 return true;
             x++;
         }
@@ -112,12 +107,11 @@ class Heuristics {
     }
 
 
-    static boolean isRightCol(int value, int x, int goal[][])
-    {
+    private static boolean isRightCol(int value, int x, int goal[][]) {
         int y = 0;
-        while(y < goal.length) {
+        while (y < goal.length) {
             int goalValue = goal[y][x];
-            if(goalValue == value)
+            if (goalValue == value)
                 return true;
             y++;
         }

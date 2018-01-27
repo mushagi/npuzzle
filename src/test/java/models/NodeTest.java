@@ -174,7 +174,4 @@ class NodeTest {
 
         assertEquals(node.getNextNodes().size(), 2);
     }
-
-
-
 }
