@@ -10,24 +10,15 @@ import static utils.Tools.removeComments;
 
 class ToolsTest {
 
-
     @Test
-    public void testGetPuzzleString()
-    {
-        String line = getPuzzleString("Musha# adasdas\nMusha");
-
-        assertEquals("Musha", line);
-    }
-
-    @Test
-    public void testRemoveComments()
+    void testRemoveComments()
     {
         String line = removeComments("Musha# adasdas");
         assertEquals("Musha", line);
     }
 
     @Test
-    public void testGetDirection()
+    void testGetDirection()
     {
 
         int[][] current = {
@@ -43,6 +34,6 @@ class ToolsTest {
         };
 
         GlobalValues.direction direction = getDirection(current, next);
-        assertEquals(GlobalValues.direction.right, direction);
+        assertEquals(GlobalValues.direction.down, direction);
     }
 }

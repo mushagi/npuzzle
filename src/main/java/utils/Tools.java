@@ -71,9 +71,9 @@ public class Tools {
             return GlobalValues.direction.right;
         else if (currentPoint.x < nextPoint.x && currentPoint.y == nextPoint.y )
             return GlobalValues.direction.left;
-        else if (currentPoint.x == nextPoint.x && currentPoint.y < nextPoint.y)
-            return GlobalValues.direction.up;
         else if (currentPoint.x == nextPoint.x && currentPoint.y > nextPoint.y)
+            return GlobalValues.direction.up;
+        else if (currentPoint.x == nextPoint.x && currentPoint.y < nextPoint.y)
             return GlobalValues.direction.down;
         else  return null;
     }

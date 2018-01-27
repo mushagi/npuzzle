@@ -81,7 +81,7 @@ class HeuristicsTest {
                 {8,5,7}
         };
 
-        assertEquals(3, tilesOutOfRowAndCol(stateGrid, gridGoal));
+        assertEquals(5, tilesOutOfRowAndCol(stateGrid, gridGoal));
     }
 
 

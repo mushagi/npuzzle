@@ -17,7 +17,7 @@ public class GlobalValues {
     public static  Stack<Node> resultSolvedPuzzlePath;
     public static int resultPuzzleSize;
     public  enum direction{
-        left, right, up , down;
+        left, right, up , down
     }
 
 

@@ -19,17 +19,12 @@ class NodeTest {
         Node node = new Node(puzzleString);
 
         int size = 3;
-        int[][] tempPuzzle = new int[size][size];
 
-        tempPuzzle[0][0] = 0;
-        tempPuzzle[0][1] = 6;
-        tempPuzzle[0][2] = 5;
-        tempPuzzle[1][0] = 2;
-        tempPuzzle[1][1] = 4;
-        tempPuzzle[1][2] = 8;
-        tempPuzzle[2][0] = 2;
-        tempPuzzle[2][1] = 7;
-        tempPuzzle[2][2] = 5;
+        int[][] tempPuzzle = {
+                {0,6,5},
+                {2,4,8},
+                {3,7,1}
+        };
 
         assertEquals(3, node.getPuzzleSize());
         assertArrayEquals(tempPuzzle, node.getPuzzle());

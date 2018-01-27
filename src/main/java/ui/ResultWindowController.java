@@ -2,11 +2,9 @@ package ui;
 
 import global.GlobalValues;
 import javafx.animation.TranslateTransition;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
@@ -25,7 +23,6 @@ public class ResultWindowController {
 
     @FXML
     private AnchorPane apnMain;
-    private GridPane gpnGrid;
 
     @FXML
     private Button btnPlay;
@@ -96,22 +93,22 @@ public class ResultWindowController {
     }
 
     private void switchTiles(StackPane stackPane1, StackPane stackPane2) {
-        animateTiles(stackPane1, GlobalValues.direction.down);
+        animateTiles(stackPane1);
     }
 
-    private void animateTiles(StackPane pane, GlobalValues.direction direction)
+    private void animateTiles(StackPane pane)
     {
 
         TranslateTransition translateTransition = new TranslateTransition();
         translateTransition.setDuration(Duration.millis(1000));
         translateTransition.setNode(pane);
-        if (direction == GlobalValues.direction.right)
+        if (GlobalValues.direction.down == GlobalValues.direction.right)
             translateTransition.setByX(pane.getLayoutX() + 100);
-        if (direction == GlobalValues.direction.left)
+        if (GlobalValues.direction.down == GlobalValues.direction.left)
             translateTransition.setByX(pane.getLayoutX() - 100);
-        if (direction == GlobalValues.direction.up)
+        if (GlobalValues.direction.down == GlobalValues.direction.up)
             translateTransition.setByY(pane.getLayoutX() - 200);
-        if (direction == GlobalValues.direction.down)
+        if (GlobalValues.direction.down == GlobalValues.direction.down)
             translateTransition.setByY(pane.getLayoutX() + 100);
         translateTransition.setCycleCount(1);
         translateTransition.setAutoReverse(false);
@@ -119,7 +116,7 @@ public class ResultWindowController {
     }
 
     private void createGrid() {
-        gpnGrid = new GridPane();
+        GridPane gpnGrid = new GridPane();
         gpnGrid.setPrefSize(500, 100);
         gpnGrid.setLayoutX(50);
         gpnGrid.setLayoutY(50);

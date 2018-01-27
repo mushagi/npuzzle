@@ -40,7 +40,7 @@ public class UserInterface {
         IDA ida;
         String puzzleString;
         puzzleString = getPuzzleString(filename);
-        if (isPuzzleSolvable(puzzleString)) {
+        if (!isPuzzleSolvable(puzzleString)) {
             System.out.println("puzzle is unsolvable");
 
             printPuzzle(new Node(puzzleString));
@@ -52,7 +52,7 @@ public class UserInterface {
         ida.doIterativeDeepeningSearch(puzzleString, heuristic);
         time = ida.getTime();
         complexity = ida.getComplexity();
-        solvedPuzzlePath = ida.getStack();
+        solvedPuzzlePath = ida.getOpenStack();
         result = ida.toString();
         moves = solvedPuzzlePath.size();
         resultTime = time ;
