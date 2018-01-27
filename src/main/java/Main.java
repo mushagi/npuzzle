@@ -20,6 +20,8 @@ class Main {
         int guiCount = 0;
         int heuristicCount = 0;
         int solvingProcessCount = 0;
+        int filecount = 0;
+
         boolean isFilenameFound = false;
 
         for (String temp: args) {
@@ -53,6 +55,7 @@ class Main {
             else {
                 filename = temp;
                 isFilenameFound = true;
+                filecount++;
             }
 
         }
@@ -61,7 +64,7 @@ class Main {
             System.out.println("No filename provided");
             System.exit(0);
         }
-        if (heuristicCount != 1 || guiCount > 1 || solvingProcessCount > 1 )
+        if (heuristicCount != 1 || guiCount > 1 || solvingProcessCount > 1 || filecount > 1)
         {
             System.out.println("Invalid arguments.");
             System.exit(0);
